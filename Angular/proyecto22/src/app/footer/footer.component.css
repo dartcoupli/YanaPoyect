@@ -1,0 +1,14 @@
+.footbar
+{   padding:20px;
+    text-align:center;
+    display:block;
+    margin-top:240px;
+    background-color: rgb(44, 62, 80);
+    height:110px;
+    color:white;
+}
+
+.copyright
+{
+    color: white;
+}

@@ -1,0 +1,11 @@
+.searchbar
+{
+    position:relative;
+    top:55px;
+    background-color: red;
+    width: 100%;
+    height: 50px;
+    float:left;
+    padding:10px;
+    font-family: Sniglet;
+}

@@ -1,0 +1,90 @@
+<div class="searchbar">
+    <label for="searchByTitle">
+        <p>Buscar por título
+            <input class="ml-1 mr-4" name="searchByTitle" type="checkbox"
+            [(checked)]="searchByTitle"
+            (change)="searchByTitle=!searchByTitle" />
+        </p>
+    </label>
+    <label for="searchByDescription">
+        <p>Buscar por descripción
+            <input class="ml-1 mr-4" name="searchByDescription"
+            [(checked)]="searchByDescription"
+            (change)="searchByDescription =!searchByDescription"
+            type="checkbox" />
+        </p>
+    </label>
+    <label for="FiltroCategoria">
+        <p class="mr-2">Buscar por Filtro
+            <select class="mr-4"
+            name="miselect"
+            (change)="selectedCategory = $event.target.value">
+                <option *ngFor="let item of this.accateList">{{item}}</option>
+            </select>
+        </p>
+    </label>
+    
+    <input type="text" name="searchByText" [(ngModel)]="searchByText" placeholder="Search..."/>
+</div>
+
+<br><br>
+
+<div class="container">
+    <div *ngFor="let user of this.activitieslistservice.activity | filter:searchByText :searchByTitle: searchByDescription: selectedCategory; let i = index">
+        <div class="row mb-4">
+                <div class="card col-center p-1 background-image background-desgradado" >
+                    <div class="row">
+                        <div class="card-header col">
+                            <h4 class="card-title p-1">{{ user.actitle }}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="card-text p-4">{{ user.acdesc }}</p>
+                            </div>
+                            <div class="row"><br>
+                                <img class="imageClass p-2 ml-4" src={{userimage}}/><img class="imageClass p-2" src={{userimage}}/>
+                            </div>
+                            <div class="row mt-3 ml-1" >
+                                <h5 class="col-3"><fa-icon [icon]="faUsers"></fa-icon>Usuario ínscritos: {{ user.acpmin }}</h5>
+                                <h5 class="col-3"><fa-icon [icon]="faUsers"></fa-icon>Usuarios máximo: {{ user.acpmax }}</h5>
+                                <h5 class="col-6 text-right">Fecha de inicio de actividad: {{ user.acdate }}</h5>
+                            </div>
+                            <div class="row">
+                                <h3 class="col-12 text-right">{{ user.acprecio }}€</h3>
+                            </div>
+                            <div *ngIf="this.idEditNowFromCookie != user.acusid">
+                                <a href="#" class="btn btn-primary ml-3">Inscribirme ya!</a>
+                            </div>
+                            
+
+                        </div>
+                    </div>  
+                </div>
+        </div>
+    </div>
+</div>
+<div id="msgVacio"></div>
+
+
+<!-- Modal update, modal de solo información -->
+<div class="modal fade" id="exampleModalAvised" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i>Tienes que seleccionar una opción mínimo.</i>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Gracias.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

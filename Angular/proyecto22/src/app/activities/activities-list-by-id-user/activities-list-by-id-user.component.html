@@ -1,0 +1,181 @@
+<div class="container">   
+    <div *ngFor='let user of this.activitieslistbyiduserservice.activity'>
+            <div class="row mb-4">
+                <div class="card col-center p-1 background-image background-desgradado" >
+                    <div class="row">
+                        <div class="card-header col">
+                            <h4 class="card-title p-1">{{ user.actitle }} </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="card-text p-4">{{ user.acdesc }}</p>
+                            </div>
+                            <div class="row">
+                              <br>
+                                <img class="imageClass p-2 ml-4" src={{userimage}}/><img class="imageClass p-2" src={{userimage}}/>
+                            </div>
+                            <div class="row mt-3 ml-1" >
+                                <h5 class="col-3"><fa-icon [icon]="faUsers"></fa-icon>Usuario ínscritos: {{ user.acpmin }}</h5>
+                                <h5 class="col-3"><fa-icon [icon]="faUsers"></fa-icon>Usuarios máximo: {{ user.acpmax }}</h5>
+                                <h5 class="col-6 text-right">Fecha de inicio de actividad: {{ user.acdate | date: 'shortDate' }}</h5>
+                            </div>
+                            <div class="row">
+                                <h3 class="col-12 text-right">{{ user.acprecio }}€</h3>
+                            </div>
+                               <!-- <a href="#" class="btn btn-primary ml-3">Inscribirme ya!</a> -->
+                                  <fa-icon data-toggle="modal" [attr.data-target]="'#exampleModal'+user.acid" class="ml-4 text-danger" [icon]="faTrash"></fa-icon>
+                                  <fa-icon data-toggle="modal" [attr.data-target]="'#updateModal'+user.acid" class="ml-4 text-success" styles="cursor: pointer" [icon]="faEdit"></fa-icon>
+                        </div>
+                    </div>  
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación de elimar -->
+<div *ngFor='let userModal of this.activitieslistbyiduserservice.activity'>
+<div class="modal fade" id="exampleModal{{userModal.acid}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ¿Estas seguro que quieres eliminar la actividad <b>llamada </b> <i>{{ userModal.actitle }} </i>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No.</button>
+          <button type="button" (click)="this.deleteActivitySeleted(userModal.acid);" data-dismiss="modal" class="btn btn-primary">Sí, Seguro!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>      
+
+
+<!-- Modal, para actualizar actuvidad CRUD -->
+<div *ngFor='let userUpdate of this.activitieslistbyiduserservice.activity'>
+  <div class="modal fade" id="updateModal{{userUpdate.acid}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editando <b>actividad</b> {{userUpdate.actitle}}.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="p-4 ml-4 mr-4" #userUpdateForm="ngForm" (ngSubmit)="this.updateActivities(this.userUpdate, userUpdateForm)" id="formEdit" ngNativeValidate>
+
+              <div class="row">
+                <div class="col-5">
+                  <label for="inputEmail3" class="col-form-label">Cambiar título </label>
+                </div>
+                <div class="col-7">
+                  <input type="text" [(ngModel)]='userUpdate.actitle' name="title"
+                  class="form-control" id="inputEmail3" maxlength="80" required>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-5">
+                  <label  for="inputPassword3" class="col-form-label">Cambiar descripción</label>
+                </div>
+                <div class="col-7">
+                  <textarea cols="30" rows="4" name="desc" [(ngModel)]="userUpdate.acdesc"
+                  class="form-control" id="validationTextarea" maxlength="500"
+                  placeholder="Required example textarea" required></textarea>
+                </div>
+              </div>
+
+                <input style="visibility: hidden; " type="text"
+                [(ngModel)]='userUpdate.acid' value="2" name="acid"
+                class="form-control" id="inputPassword3" readonly>
+
+                <input style="visibility: hidden; " type="date"
+                [(ngModel)]='userUpdate.accrdt' value="2" name="accrdt"
+                class="form-control" id="inputPassword3" readonly>
+
+              <div class="row mt-4">
+                <div class="col-5">
+                  <label for="inputPassword3" class="col-form-label">Cambiar mínimo de participantes</label>
+                </div>
+                <div class="col-7">
+                  <input type="text" [(ngModel)]='userUpdate.acpmin' name="min" class="form-control"
+                  id="inputPassword3" minlength="1" maxlength="3" required>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-5">
+                  <label for="inputPassword3" class="col-form-label">Cambiar máximo de participantes</label>
+                </div>
+                <div class="col-7">
+                  <input type="text" [(ngModel)]='userUpdate.acpmax' name="max" class="form-control"
+                  id="inputPassword3" minlength="1" maxlength="3" required>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-5">
+                  <label for="inputPassword3" class="col-form-label">Fecha de celebración</label><p>aaa </p>
+                </div>
+                <div class="col-7">
+
+                  <!-- <input value="2018-02-01" name='acdate' [ngModel]="userUpdate.acdate | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="userUpdate.acdate = $event" #acdate  type="date" class="form-control" id="inputPassword3" required/>-->
+                  <input name='date' [ngModel]="userUpdate.acdate"
+                  (ngModelChange)="userUpdate.acdate = $event" #acdate
+                  type="date" class="form-control" id="inputPassword3" useValueAsDate required/>
+
+                  
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-5">
+                  <label for="inputPassword3" class="col-form-label">Precío por participante</label>
+                </div>
+                <div class="col-7">
+                  <input type="text" [(ngModel)]='userUpdate.acprecio'
+                  name="precio" class="form-control" id="inputPassword3"
+                  maxlength="3" required>
+                </div>
+              </div>
+              <div class="modal-footer mt-4">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar cambios.</button>
+                <input type="submit" class="btn btn-primary"  value="Actualizar!">
+              </div>
+
+            </form>
+              </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>    
+
+<!-- Modal update, modal de solo información -->
+  <div class="modal fade" id="exampleModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Información</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i>Se ha actualizado la Actividad.</i>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Gracias.</button>
+        </div>
+      </div>
+    </div>
+  </div>

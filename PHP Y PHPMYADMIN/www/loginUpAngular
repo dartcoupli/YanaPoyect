@@ -1,0 +1,28 @@
+
+<?php
+
+# .____                 .__          ____ ___         __________  ___ _____________     _____    _______  ________       _____    _______    ________ ____ ___.____       _____ __________ 
+# |    |    ____   ____ |__| ____   |    |   \_____   \______   \/   |   \______   \   /  _  \   \      \ \______ \     /  _  \   \      \  /  _____/|    |   \    |     /  _  \\______   \
+# |    |   /  _ \ / ___\|  |/    \  |    |   |____ \   |     ___/    ~    \     ___/  /  /_\  \  /   |   \ |    |  \   /  /_\  \  /   |   \/   \  ___|    |   /    |    /  /_\  \|       _/
+# |    |__(  <_> ) /_/  >  |   |  \ |    |  /|  |_> >  |    |   \    Y    /    |     /    |    \/    |    \|    `   \ /    |    \/    |    \    \_\  \    |  /|    |___/    |    \    |   \
+# |_______ \____/\___  /|__|___|  / |______/ |   __/   |____|    \___|_  /|____|     \____|__  /\____|__  /_______  / \____|__  /\____|__  /\______  /______/ |_______ \____|__  /____|_  /
+#        \/    /_____/         \/           |__|                      \/                    \/         \/        \/          \/         \/        \/                 \/       \/       \/ 
+
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Headers: Origin, X-Rquest-With, Content-Type, Accept');
+	
+	$json = file_get_contents('php://input');
+	$params = json_decoder($json);
+	
+	require('dbconnect.php');
+	
+	$sql = "SELECT * FROM users WHERE usemail='$params->usemail'";
+	$result = mysql_query($connect, $query);
+	$reg = mysql_fetch_array($result, MYSQL_ASSOC);
+	
+	class Result();
+	
+	$response = new Result();
+	$response->email = $reg['usemail'];
+	$response->email = $reg['uspassword'];
+?>

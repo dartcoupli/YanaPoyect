@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+		.resultado {
+			background-color: #ffe;
+			height: 180px;
+			overflow-y:scroll;
+		}
+		.section {
+			background-color:#ffc;
+			padding:20px;
+		}
+
+		input[type="text"] {
+			width: 100%;
+		}
+
+		#txtJson {
+			border: 1px solid #ddd;
+			background-color:#fff;
+			overflow-y:scroll;
+		}
+		h4{
+			padding-bottom:18px;
+			text-decoration:underline;
+		}
+	</style>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body class="container">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2>
+					Awake debug!
+				</h2>
+				<p>
+					Os he diseñado esto pequeño form para que comprobeis como hacer peticiones en vuestra app y como las
+					resuelve en JSON.
+				</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row section">
+			<div class="col-12">
+				<h4>REQUEST:</h4>
+			</div>
+			<div class="col-2">
+				<select name="method" id="method">
+					<option value="GET">GET</option>
+					<option value="POST">POST</option>
+					<option value="PUT">PUT</option>
+					<option value="DELETE">DELETE</option>
+				</select>
+			</div>
+			<div class="col-8">
+				<input type="text" name="url" id="url" value="http://localhost:8080/">
+			</div>
+			<div class="col-2">
+				<input type="button" class="btn btn-primary" value="Enviar" onClick="enviar()"> 
+			</div>
+			<div class="col-12">
+				<p><input type="checkbox" id="chkJson" value="1"> Además, quiero enviar esto:</p>
+				<div id="txtJson" contenteditable="true">
+					
+{
+	"username":"pepe",
+	"password":"pass1234"
+}
+
+</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row section">
+			<div class="col-12">
+				<h4>RESPONSE:</h4>
+			</div>
+			<div class="col-12 resultado" id="resultado"></div>
+		</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
+
+
+<script>
+	function enviar(){
+		var method=document.getElementById("method").options[document.getElementById("method").selectedIndex].value;
+		var url=document.getElementById("url").value;
+		var txtJson;
+		var resultado=document.getElementById("resultado");
+		var xhr = new XMLHttpRequest();
+		xhr.open(method, url);
+		if(document.getElementById("chkJson").checked){
+			txtJson=JSON.parse(document.getElementById("txtJson").innerText.trim());
+			xhr.setRequestHeader("Content-Type", "application/json");
+			console.log(txtJson);
+			console.log(JSON.stringify(txtJson));
+			xhr.send(JSON.stringify(txtJson));
+		}else{
+			xhr.send();
+		}
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				resultado.innerText=xhr.responseText;
+			}
+			else {
+				resultado.innerText='Request failed.  Returned status of ' + xhr.status;
+			}
+		};
+	}
+</script>
+
+
+</html>

@@ -1,0 +1,74 @@
+
+/*
+  LoginUpWithCookie(email: string, password: string)
+  {
+    this.loginupservice.verifyNotAlteresCookie(email, password).subscribe(responseUserDb =>
+    {
+      if(responseUserDb['usemail'] == email && responseUserDb['uspassword'] == password)
+      {
+        this.isLogged = true;
+          console.log("USUARIO" + responseUserDb['usemail']);   // <========================================================== TEST
+          console.log("USUARIO" + responseUserDb['usid']);   // <========================================================== TEST
+      }
+      else
+      {
+        this.isLogged = false;
+      }
+    })
+  }
+*/
+  /*ngOnInit(): void
+  {
+    
+    this.emailFromCookie = this.getCookie("yana_user_cookie");
+    this.passwordFromCookie = this.getCookie("yana_password_cookie");
+    
+    this.LoginUpWithCookie(this.emailFromCookie, this.passwordFromCookie);
+    //console.log("COOKIE PASSWORD!!!!!" + this.getCookie("yana_password_cookie")); //<== TESTED
+    //console.log("COOKIE USER!!!!!" + this.getCookie("yana_user_cookie")); //<== TESTED
+  */
+
+
+
+
+  SERVICIO, ANTIGUO
+
+  /*
+public userLoginUp : user;
+
+httpOptiones = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  // 'Authorization': 'Basic ' + btoa(`pepe:1234`)
+  })
+}
+
+constructor(private http: HttpClient)
+{
+this.userLoginUp =
+    {
+      usid: 1,
+      usname: "",
+      ussurname: "",   
+      usalias: "",
+      usemail: "",
+      uspassword: "",
+      usphone: 1,
+      usdborn: new Date(2005, 1, 4),
+      usaccid: 1,
+      usactive: 1,
+      usfalta: new Date(2005, 1, 4),
+      usavatar: "",
+      ustoken: ""
+    };
+}
+//JSON.stringify(this.userLoginUp)
+verifyNotAlteresCookie(emailFromCookie: string, passwordFromCookie: string)
+{
+  //this.userLoginUp.usemail = emailFromCookie;
+  //this.userLoginUp.uspassword = passwordFromCookie;
+  console.log(JSON.stringify(emailFromCookie));
+  return this.http.post('http://localhost/loginUpAngular.php', { name: 22, email: 22 }, this.httpOptiones);
+
+}
+*/

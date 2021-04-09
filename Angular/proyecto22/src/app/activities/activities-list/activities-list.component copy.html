@@ -1,0 +1,51 @@
+<div class="searchbar">
+    <label for="searchByTitle">
+        <p>Buscar por título
+        <input class="ml-1 mr-4" name="searchByTitle" type="checkbox" [(checked)]="searchByTitle" (change)="searchByTitle=!searchByTitle" /></p>
+    </label>
+    <label for="searchByDescription">
+        <p>Buscar por descripción
+        <input class="ml-1 mr-4" name="searchByDescription" [(checked)]="searchByDescription"
+        (change)="searchByDescription =!searchByDescription"
+        type="checkbox" /></p>
+    </label>
+    <input type="text" name="searchByText" [(ngModel)]="searchByText" placeholder="Search..."/>    
+</div>
+<div class="container">
+    <div *ngFor="let user of this.activitieslistservice.activity | filter:searchByText">
+            <div class="row mb-4">
+                <div class="card col-center p-1 background-image background-desgradado" >
+                    <div class="row">
+                        <div class="card-header col">
+                            <h4 class="card-title p-1">{{ user.actitle }}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="card-text p-4">{{ user.acdesc }}</p>
+                            </div>
+                            <div class="row"><br>
+                                <img class="imageClass p-2 ml-4" src={{userimage}}/><img class="imageClass p-2" src={{userimage}}/>
+                            </div>
+                            <div class="row mt-3 ml-1" >
+                                <h5 class="col-3"><fa-icon [icon]="faUsers"></fa-icon>Usuario ínscritos: {{ user.acpmin }}</h5>
+                                <h5 class="col-3"><fa-icon [icon]="faUsers"></fa-icon>Usuarios máximo: {{ user.acpmax }}</h5>
+                                <h5 class="col-6 text-right">Fecha de inicio de actividad: {{ user.acdate }}</h5>
+                            </div>
+                            <div class="row">
+                                <h3 class="col-12 text-right">{{ user.acprecio }}€</h3>
+                            </div>
+                                <div *ngIf="this.idEditNowFromCookie != user.acusid">
+                                    <a href="#" class="btn btn-primary ml-3">Inscribirme ya!</a>
+                                </div>
+                        </div>
+                    </div>  
+                </div>
+        </div>
+        
+    </div>
+</div>
+
+
+

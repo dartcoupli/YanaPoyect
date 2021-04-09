@@ -1,0 +1,13 @@
+<div class="searchbar">
+    <label for="searchByTitle">
+        <p>Buscar por título
+        <input class="ml-1 mr-4" name="searchByTitle" type="checkbox" [(checked)]="searchByTitle" (change)="searchByTitle=!searchByTitle" /></p>
+    </label>
+    <label for="searchByDescription">
+        <p>Buscar por descripción
+        <input class="ml-1 mr-4" name="searchByDescription" [(checked)]="searchByDescription"
+        (change)="searchByDescription =!searchByDescription"
+        type="checkbox" /></p>
+    </label>
+    <input type="text" name="searchByText" [(ngModel)]="searchByText" placeholder="Search..."/>    
+</div>

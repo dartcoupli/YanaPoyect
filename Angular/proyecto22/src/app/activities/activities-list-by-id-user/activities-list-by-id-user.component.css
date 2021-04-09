@@ -1,0 +1,49 @@
+div
+{
+    font-family: 'Sniglet'; 
+}
+.imageClass
+{
+    width: 150px;
+    height: 120px;
+    margin-right:25px;
+    border: 2px solid black;
+}
+.background-image {
+   background-image: url('backgroundCard.png');
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: block;
+   background-size: auto 100%;
+   z-index: 10;
+}
+
+.background-desgradado {
+    background-image: url('backgroundCard.gif'), rgba(197,191,237,1);
+    background-image: url('backgroundCard.gif'), -moz-linear-gradient(top, rgba(197,191,237,1) 0%, rgba(182,168,225,1) 50%, rgba(171,160,222,1) 51%, rgba(155,151,221,1) 100%);
+    background-image: url('backgroundCard.gif'), -webkit-gradient(left top, left bottom, color-stop(0%, rgba(197,191,237,1)), color-stop(50%, rgba(182,168,225,1)), color-stop(51%, rgba(171,160,222,1)), color-stop(100%, rgba(155,151,221,1)));
+    background-image: url('backgroundCard.gif'), -webkit-linear-gradient(top, rgba(197,191,237,1) 0%, rgba(182,168,225,1) 50%, rgba(171,160,222,1) 51%, rgba(155,151,221,1) 100%);
+    background-image: url('backgroundCard.gif'), -o-linear-gradient(top, rgba(197,191,237,1) 0%, rgba(182,168,225,1) 50%, rgba(171,160,222,1) 51%, rgba(155,151,221,1) 100%);
+    background-image: url('backgroundCard.gif'), -ms-linear-gradient(top, rgba(197,191,237,1) 0%, rgba(182,168,225,1) 50%, rgba(171,160,222,1) 51%, rgba(155,151,221,1) 100%);
+    background-image: url('backgroundCard.gif'), linear-gradient(to bottom, rgba(197,191,237,1) 0%, rgba(182,168,225,1) 50%, rgba(171,160,222,1) 51%, rgba(155,151,221,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c5bfed', endColorstr='#9b97dd', GradientType=0 );
+    display: block;  
+    z-index: 0;
+}
+
+.card
+{
+   width: 950px;
+}
+
+.searchbar
+{
+    position:relative;
+    top:55px;
+    background-color: red;
+    width: 100%;
+    height: 50px;
+    float:left;
+    padding:10px;
+    font-family: Sniglet;
+}

@@ -1,0 +1,33 @@
+.toolbar
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(44, 62, 80);
+    color: white;
+    font-weight: 600;
+    height:80px;
+}
+.avatar-text
+{
+  margin-left:20px;
+  margin-top:0px;
+}
+a
+{
+  color:white;
+  font-weight: bold;
+}
+a:hover
+{
+  color: #8C0700;
+  font-weight: bold;
+}
+a:link
+{
+  text-decoration:none;
+} 
